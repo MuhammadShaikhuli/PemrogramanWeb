@@ -23,6 +23,11 @@ if (!is_numeric($stok) || $stok < 0) {
     $errors[] = "Stok tidak boleh negatif.";
 }
 
+// tambahan (Tugas 1)
+if ($isbn !== '' && !preg_match('/^[0-9-]+$/', $isbn)) {
+    $errors[] = "ISBN hanya boleh berisi angka dan tanda hubung (-).";
+}
+
 // Jika terdapat kesalahan validasi
 if (!empty($errors)) {
     $_SESSION['flash'] = ['type' => 'error', 'pesan' => implode(' ', $errors)];

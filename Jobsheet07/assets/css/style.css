@@ -1,4 +1,4 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -146,7 +146,8 @@ td button.btn-detail {
 }
 
 /* Form */
-form p {
+form p,
+form div {
     margin-bottom: 1rem;
 }
 
@@ -178,7 +179,7 @@ form button[type="submit"] {
 }
 
 form button[type="submit"]:hover {
-    background-color: #8a521d;
+    background-color: #6e4117;
 }
 
 /* Footer */
@@ -189,13 +190,14 @@ footer {
     font-size: 0.9rem;
 }
 
-/*Responsive Table*/
+/* Responsive Table */
 .table-responsive {
     width: 100%;
     overflow-x: auto;
 }
 
-/* Styling Menu Toggle (Hamburger Button) */
+/* Styling Menu Toggle (Hamburger Button) - Sembunyi Default di Desktop */
+#nav-toggle-btn,
 .menu-btn {
     display: none;
     background: none;
@@ -209,10 +211,11 @@ footer {
     cursor: pointer;
 }
 
-/* Responsif Navigasi dengan Transisi Halus */
+/* Responsif Navigasi untuk Layar Mobile / Tablet */
 @media (max-width: 900px) {
+    #nav-toggle-btn,
     .menu-btn {
-        display: block;
+        display: block; /* Muncul hanya di layar kecil */
     }
 
     header nav {
@@ -220,11 +223,11 @@ footer {
         max-height: 0;
         opacity: 0;
         overflow: hidden;
-        /* Efek transisi geser dan memudar */
         transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
     }
 
-    header nav.nav-open {
+    header nav.nav-open,
+    header nav.active-nav {
         max-height: 300px; /* Batas tinggi saat menu terbuka */
         opacity: 1;
     }
@@ -261,7 +264,7 @@ footer {
     margin-top: 0.25rem;
 }
 
-/*Flash Message*/
+/* Flash Message */
 .flash {
     padding: 0.75rem 1rem;
     border-radius: 6px;
