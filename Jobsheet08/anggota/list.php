@@ -1,9 +1,12 @@
 <?php
 $page_title = "Daftar Anggota";
+require __DIR__ . '/../includes/koneksi.php';
 include __DIR__ . '/../includes/header.php';
+
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
-$daftarAnggota = $_SESSION['anggota'] ?? [];
+
+$daftarAnggota = $pdo->query("SELECT * FROM anggota ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <section>
     <h2>Daftar Anggota</h2>
@@ -12,16 +15,16 @@ $daftarAnggota = $_SESSION['anggota'] ?? [];
     <?php endif; ?>
     <div class="search-box">
         <label for="search-input">Cari Anggota</label>
-        <input type="text" id="search-input" placeholder="Ketik nama atau NIM...">
+        <input type="text" id="search-input" placeholder="Ketik nama atau No. Anggota...">
     </div>
     <div class="table-responsive">
         <table>
             <thead>
                 <tr>
-                    <th>NIM / ID</th>
+                    <th>No. Anggota</th>
                     <th>Nama</th>
-                    <th>Email</th>
-                    <th>Jurusan</th>
+                    <th>Alamat</th>
+                    <th>No. HP</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -33,10 +36,10 @@ $daftarAnggota = $_SESSION['anggota'] ?? [];
             <?php else: ?>
                 <?php foreach ($daftarAnggota as $anggota): ?>
                 <tr>
-                    <td><?php echo $anggota['nim']; ?></td>
-                    <td><?php echo $anggota['nama']; ?></td>
-                    <td><?php echo $anggota['email']; ?></td>
-                    <td><?php echo $anggota['jurusan']; ?></td>
+                    <td><?php echo htmlspecialchars($anggota['no_anggota']); ?></td>
+                    <td><?php echo htmlspecialchars($anggota['nama']); ?></td>
+                    <td><?php echo htmlspecialchars($anggota['alamat'] ?? '-'); ?></td>
+                    <td><?php echo htmlspecialchars($anggota['no_hp'] ?? '-'); ?></td>
                     <td>
                         <button type="button">Edit</button>
                         <button type="button" class="btn-hapus">Hapus</button>

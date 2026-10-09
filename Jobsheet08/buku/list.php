@@ -1,9 +1,12 @@
 <?php
 $page_title = "Daftar Buku";
+require __DIR__ . '/../includes/koneksi.php';
 include __DIR__ . '/../includes/header.php';
+
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
-$daftarBuku = $_SESSION['buku'] ?? [];
+
+$daftarBuku = $pdo->query("SELECT * FROM buku ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <section>
     <h2>Daftar Buku</h2>
@@ -33,10 +36,10 @@ $daftarBuku = $_SESSION['buku'] ?? [];
             <?php else: ?>
                 <?php foreach ($daftarBuku as $buku): ?>
                 <tr>
-                    <td><?php echo $buku['judul']; ?></td>
-                    <td><?php echo $buku['pengarang']; ?></td>
-                    <td><?php echo $buku['tahun']; ?></td>
-                    <td><?php echo $buku['stok']; ?></td>
+                    <td><?php echo htmlspecialchars($buku['judul']); ?></td>
+                    <td><?php echo htmlspecialchars($buku['pengarang']); ?></td>
+                    <td><?php echo htmlspecialchars($buku['tahun']); ?></td>
+                    <td><?php echo htmlspecialchars($buku['stok']); ?></td>
                     <td>
                         <button type="button">Edit</button>
                         <button type="button" class="btn-hapus">Hapus</button>
@@ -49,4 +52,3 @@ $daftarBuku = $_SESSION['buku'] ?? [];
     </div>
 </section>
 <?php include __DIR__ . '/../includes/footer.php'; ?>
-
